@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { formControlName } from './validation.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-validation',
@@ -11,8 +12,11 @@ export class ValidationComponent implements OnInit{
 
   form!:FormGroup;
   formCtrName = formControlName;
+  errorMessageUserName: string ='';
+  errorMessagePassword: string ='';
+  errorMessageEmail: string ='';
 
-  constructor() { }
+  constructor(private toastr: ToastrService) { }
   
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -25,9 +29,11 @@ export class ValidationComponent implements OnInit{
 
   onSubmit() {
     if(this.form.valid) {
-      console.log('this form is Valid');
+      this.toastr.success('this form was submit successfully!');
+      console.log('this form was submit successfully.');
     } else {
-      console.log('this form is Invalid');
+      this.toastr.error('this form is Invalid!');
+      console.log('this form is Invalid.');
     }
   } 
 
@@ -48,6 +54,31 @@ export class ValidationComponent implements OnInit{
       control?.clearValidators();
       control?.updateValueAndValidity();
     }
+  }
+
+  validation(formControlName:string) {
+    const control = this.form.get(formControlName)
+    if (formControlName === this.formCtrName.userName) {
+    if(control?.invalid) {
+      this.errorMessageUserName = `${formControlName} is invalid.`
+    } else {
+      this.errorMessageUserName = '';
+    }
+  }
+  if (formControlName === this.formCtrName.password) {
+    if(control?.invalid) {
+      this.errorMessagePassword = `${formControlName} is invalid.`
+    } else {
+      this.errorMessagePassword = '';
+    }
+  }
+  if (formControlName === this.formCtrName.email) {
+    if(control?.invalid) {
+      this.errorMessageEmail = `${formControlName} is invalid.`
+    } else {
+      this.errorMessageEmail = '';
+    }
+  }
   }
 
 }

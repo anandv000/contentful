@@ -3,29 +3,32 @@
         <div>
             <label class="form-label">UserName</label>
             <div class="d-flex align-items-center">
-                <input type="text" class="form-control" placeholder="Enter UserName here" [formControlName]="formCtrName.userName">
+                <input type="text" class="form-control" [ngClass]="errorMessageUserName.length ? 'is-invalid':''" placeholder="Enter UserName here" [formControlName]="formCtrName.userName" (input)="validation(formCtrName.userName)">
                 <div class="ms-2">
                     <input class="form-check-input" type="checkbox" [formControlName]="formCtrName.isChecked" (change)="onChecked(formCtrName.userName,$event)">
                 </div>
             </div>
+            <span class="text-danger">{{errorMessageUserName}}</span>
         </div>
         <div>
             <label class="form-label">Password</label>
             <div class="d-flex align-items-center">
-                <input type="text" class="form-control" placeholder="Enter Password here" [formControlName]="formCtrName.password">
+                <input type="text" class="form-control" [ngClass]="errorMessagePassword.length ? 'is-invalid':''" placeholder="Enter Password here" [formControlName]="formCtrName.password" (input)="validation(formCtrName.password)">
                 <div class="ms-2">
                     <input class="form-check-input" type="checkbox" [formControlName]="formCtrName.isChecked" (change)="onChecked(formCtrName.password,$event)">
                 </div>
             </div>
+            <span class="text-danger">{{errorMessagePassword}}</span>
         </div>  
         <div>
             <label class="form-label">Email</label>
             <div class="d-flex align-items-center">
-                <input type="text" class="form-control" placeholder="Enter Email here" [formControlName]="formCtrName.email">
+                <input type="text" class="form-control" [ngClass]="errorMessageEmail.length ? 'is-invalid':''" placeholder="Enter Email here" [formControlName]="formCtrName.email" (input)="validation(formCtrName.email)">
                 <div class="ms-2">
                     <input class="form-check-input" type="checkbox" [formControlName]="formCtrName.isChecked" (change)="onChecked(formCtrName.email,$event)">
                 </div>
             </div>
+            <span class="text-danger">{{errorMessageEmail}}</span>
         </div>
         <div class="mt-3">
             <button type="submit" class="btn btn-outline-primary">Submit</button>
